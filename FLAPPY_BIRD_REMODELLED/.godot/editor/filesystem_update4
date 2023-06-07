@@ -1,0 +1,12 @@
+res://scenes/Objects/pipe.tscn
+res://scenes/Objects/pipes.tscn
+res://scenes/Objects/pipes.gd
+res://scenes/Actor/player.tscn
+res://scenes/Actor/player.gd
+res://scenes/Main/main.gd
+res://scenes/Main/main.tscn
+res://scenes/Main/PipeSpawner.gd
+res://scenes/Interfaces/hud.tscn
+res://scenes/Interfaces/hud.gd
+res://scenes/Interfaces/ScoreContainer.gd
+res://scenes/Interfaces/bg.tscn

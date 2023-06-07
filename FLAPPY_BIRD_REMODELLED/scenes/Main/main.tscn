@@ -1,0 +1,58 @@
+[gd_scene load_steps=8 format=3 uid="uid://c0cjq7g17uaa2"]
+
+[ext_resource type="PackedScene" uid="uid://cg6xtroxo58wj" path="res://scenes/Interfaces/bg.tscn" id="1_i261p"]
+[ext_resource type="Script" path="res://scenes/Main/main.gd" id="1_yjlhj"]
+[ext_resource type="PackedScene" uid="uid://ds50qyuspstog" path="res://scenes/Actor/player.tscn" id="2_822o2"]
+[ext_resource type="Texture2D" uid="uid://0gq0km813dve" path="res://assets/Sprite/FlappyAsset/background-1.png" id="2_w03xp"]
+[ext_resource type="PackedScene" uid="uid://cmwqqd710ibqg" path="res://scenes/Interfaces/hud.tscn" id="3_f1gir"]
+[ext_resource type="Script" path="res://scenes/Main/PipeSpawner.gd" id="5_dpcwh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ck133"]
+size = Vector2(288, 50)
+
+[node name="Main" type="Control"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yjlhj")
+metadata/_edit_vertical_guides_ = [288.0]
+metadata/_edit_horizontal_guides_ = [512.0]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -101
+
+[node name="Background-1" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(145, 256)
+texture = ExtResource("2_w03xp")
+
+[node name="PipeSpawner" type="Node2D" parent="CanvasLayer"]
+position = Vector2(328, 216)
+script = ExtResource("5_dpcwh")
+
+[node name="Timer" type="Timer" parent="CanvasLayer/PipeSpawner"]
+process_callback = 0
+wait_time = 1.45
+
+[node name="Player" parent="." instance=ExtResource("2_822o2")]
+position = Vector2(128, 192)
+
+[node name="HUD" parent="." instance=ExtResource("3_f1gir")]
+layout_mode = 1
+
+[node name="BG" parent="." instance=ExtResource("1_i261p")]
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(145, 440)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+position = Vector2(-1, -15)
+shape = SubResource("RectangleShape2D_ck133")
+
+[connection signal="score_updated" from="CanvasLayer/PipeSpawner" to="HUD" method="_on_score_updated"]
+[connection signal="timeout" from="CanvasLayer/PipeSpawner/Timer" to="CanvasLayer/PipeSpawner" method="_on_timer_timeout"]
+[connection signal="gameover" from="Player" to="." method="_on_gameover"]
+[connection signal="startGame" from="HUD" to="." method="_on_start_game"]

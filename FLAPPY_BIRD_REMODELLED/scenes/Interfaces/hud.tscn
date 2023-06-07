@@ -1,0 +1,121 @@
+[gd_scene load_steps=8 format=3 uid="uid://cmwqqd710ibqg"]
+
+[ext_resource type="Script" path="res://scenes/Interfaces/hud.gd" id="1_04xbu"]
+[ext_resource type="Texture2D" uid="uid://k5sen28dp5ud" path="res://assets/Sprite/FlappyAsset/message.png" id="1_u453a"]
+[ext_resource type="Script" path="res://scenes/Interfaces/ScoreContainer.gd" id="2_cb0a4"]
+[ext_resource type="Texture2D" uid="uid://ctujflsewkyso" path="res://assets/Sprite/FlappyAsset/panel_score.png" id="4_0pp6k"]
+[ext_resource type="Texture2D" uid="uid://d1s0okrlbvu4t" path="res://assets/Sprite/FlappyAsset/button_play_normal.png" id="5_dg5vo"]
+[ext_resource type="Texture2D" uid="uid://dtv4lt0vuia0o" path="res://assets/Sprite/FlappyAsset/button_play_pressed.png" id="6_fmxye"]
+[ext_resource type="Texture2D" uid="uid://ce06s0rgtxa5c" path="res://assets/Sprite/FlappyAsset/gameover.png" id="7_aipcy"]
+
+[node name="HUD" type="TextureButton"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_04xbu")
+
+[node name="Banner" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -112.0
+offset_top = 40.0
+offset_right = 104.0
+offset_bottom = 360.0
+grow_horizontal = 2
+texture = ExtResource("1_u453a")
+
+[node name="ScoreContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -16.0
+offset_top = 16.0
+offset_right = 24.0
+offset_bottom = 56.0
+grow_horizontal = 2
+alignment = 1
+script = ExtResource("2_cb0a4")
+
+[node name="ScorePanel" type="TextureRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -128.0
+offset_top = 72.0
+offset_right = 128.0
+offset_bottom = 256.0
+grow_horizontal = 2
+texture = ExtResource("4_0pp6k")
+
+[node name="RunScoreContainer" type="HBoxContainer" parent="ScorePanel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -89.0
+offset_top = 50.0
+offset_right = -24.0
+offset_bottom = 91.0
+grow_horizontal = 0
+alignment = 1
+script = ExtResource("2_cb0a4")
+
+[node name="BestScoreContainer" type="HBoxContainer" parent="ScorePanel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -91.0
+offset_top = -67.0
+offset_right = -24.0
+offset_bottom = -26.0
+grow_horizontal = 0
+grow_vertical = 0
+alignment = 1
+script = ExtResource("2_cb0a4")
+
+[node name="RestartButton" type="TextureButton" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -72.0
+offset_top = 24.0
+offset_right = 68.0
+offset_bottom = 93.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("5_dg5vo")
+texture_pressed = ExtResource("6_fmxye")
+stretch_mode = 0
+
+[node name="GameOver" type="TextureRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -47.5
+offset_right = 128.0
+offset_bottom = 47.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_aipcy")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
+[connection signal="pressed" from="RestartButton" to="." method="_on_restart_button_pressed"]
