@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://ds50qyuspstog"]
+[gd_scene load_steps=17 format=3 uid="uid://ds50qyuspstog"]
 
 [ext_resource type="Script" path="res://scenes/Actor/player.gd" id="1_45447"]
 [ext_resource type="Texture2D" uid="uid://dbycgducf5hue" path="res://assets/Sprite/FlappyAsset/bluebird-downflap.png" id="1_poxuk"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cvqqtuprcpbnv" path="res://assets/Sprite/FlappyAsset/yellowbird-downflap.png" id="7_2u4md"]
 [ext_resource type="Texture2D" uid="uid://chfbklg68q4of" path="res://assets/Sprite/FlappyAsset/yellowbird-midflap.png" id="8_dw5vo"]
 [ext_resource type="Texture2D" uid="uid://bsoi2jpdhgd6g" path="res://assets/Sprite/FlappyAsset/yellowbird-upflap.png" id="9_nsyft"]
+[ext_resource type="AudioStream" uid="uid://bj4ob3ox7db3b" path="res://assets/Music/hit.ogg" id="11_vc1ny"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_lbbls"]
 animations = [{
@@ -110,6 +111,7 @@ _data = {
 
 [node name="Player" type="Area2D"]
 texture_filter = 1
+collision_mask = 6
 script = ExtResource("1_45447")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -123,5 +125,9 @@ shape = SubResource("CircleShape2D_nqcr3")
 libraries = {
 "": SubResource("AnimationLibrary_gdfww")
 }
+
+[node name="Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_vc1ny")
+volume_db = -15.036
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

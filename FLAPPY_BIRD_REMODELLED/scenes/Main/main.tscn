@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://c0cjq7g17uaa2"]
+[gd_scene load_steps=9 format=3 uid="uid://c8ep7mau5r436"]
 
-[ext_resource type="PackedScene" uid="uid://cg6xtroxo58wj" path="res://scenes/Interfaces/bg.tscn" id="1_i261p"]
+[ext_resource type="PackedScene" uid="uid://bsikw2am20ktv" path="res://scenes/Interfaces/Floor.tscn" id="1_i261p"]
 [ext_resource type="Script" path="res://scenes/Main/main.gd" id="1_yjlhj"]
 [ext_resource type="PackedScene" uid="uid://ds50qyuspstog" path="res://scenes/Actor/player.tscn" id="2_822o2"]
 [ext_resource type="Texture2D" uid="uid://0gq0km813dve" path="res://assets/Sprite/FlappyAsset/background-1.png" id="2_w03xp"]
 [ext_resource type="PackedScene" uid="uid://cmwqqd710ibqg" path="res://scenes/Interfaces/hud.tscn" id="3_f1gir"]
+[ext_resource type="AudioStream" uid="uid://f26qrwu0dqc6" path="res://assets/Music/point.wav" id="4_xh2e1"]
 [ext_resource type="Script" path="res://scenes/Main/PipeSpawner.gd" id="5_dpcwh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ck133"]
@@ -25,7 +26,7 @@ metadata/_edit_horizontal_guides_ = [512.0]
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -101
 
-[node name="Background-1" type="Sprite2D" parent="CanvasLayer"]
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer"]
 position = Vector2(145, 256)
 texture = ExtResource("2_w03xp")
 
@@ -35,7 +36,10 @@ script = ExtResource("5_dpcwh")
 
 [node name="Timer" type="Timer" parent="CanvasLayer/PipeSpawner"]
 process_callback = 0
-wait_time = 1.45
+
+[node name="PointSound" type="AudioStreamPlayer2D" parent="CanvasLayer/PipeSpawner"]
+stream = ExtResource("4_xh2e1")
+attenuation = 4.92457
 
 [node name="Player" parent="." instance=ExtResource("2_822o2")]
 position = Vector2(128, 192)
@@ -43,13 +47,14 @@ position = Vector2(128, 192)
 [node name="HUD" parent="." instance=ExtResource("3_f1gir")]
 layout_mode = 1
 
-[node name="BG" parent="." instance=ExtResource("1_i261p")]
+[node name="Floor" parent="." instance=ExtResource("1_i261p")]
 
-[node name="Floor" type="StaticBody2D" parent="."]
-position = Vector2(145, 440)
+[node name="StaticBody2D" type="StaticBody2D" parent="Floor"]
+position = Vector2(144, 424)
+collision_layer = 4
+collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
-position = Vector2(-1, -15)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor/StaticBody2D"]
 shape = SubResource("RectangleShape2D_ck133")
 
 [connection signal="score_updated" from="CanvasLayer/PipeSpawner" to="HUD" method="_on_score_updated"]

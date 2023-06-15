@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bsikw2am20ktv"]
+
+[ext_resource type="Script" path="res://scenes/Interfaces/floor.gd" id="1_4s43k"]
+[ext_resource type="Texture2D" uid="uid://cavivmd272yej" path="res://assets/Sprite/FlappyAsset/base.png" id="2_skkfh"]
+
+[node name="Floor" type="ParallaxBackground"]
+script = ExtResource("1_4s43k")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2(336, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(168, 456)
+texture = ExtResource("2_skkfh")

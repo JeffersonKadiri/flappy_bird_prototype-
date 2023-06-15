@@ -2,9 +2,6 @@ extends HBoxContainer
 
 var index = 0
 
-#func _ready():
-#	update_score(0)
-
 func update_score(score) -> void:
 	var score_to_string = str(score)
 	while get_child_count() < score_to_string.length(): add_texture_node()
